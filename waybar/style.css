@@ -7,7 +7,7 @@
 }
 
 window#waybar {
-  background-color: #222222;
+  background-color: rgba(34, 34, 34, 0.8);
   transition-property: background-color;
   transition-duration: 0.5s;
 }
@@ -57,10 +57,12 @@ window#waybar.hidden {
 #wireplumber,
 #network,
 #clock,
+
 #tray {
   border-radius: 4px;
   margin: 6px 3px;
   padding: 6px 12px;
+  opacity: 0.9;
   background-color: #222222;
   color: #222222;
 }
@@ -73,7 +75,7 @@ window#waybar.hidden {
   padding-right: 7px;
   padding-left: 7px;
   margin-left: 5px;
-  font-size: 15px;
+  font-size: 20px;
   border-radius: 8px 0px 0px 8px;
   color: #D399A1;
 }
@@ -114,6 +116,7 @@ window#waybar.hidden {
 #clock {
   font-family: JetBrainsMono Nerd Font;
   background-color: #D399A1;
+  margin-right: 10px;
 }
 
 #custom-power {
