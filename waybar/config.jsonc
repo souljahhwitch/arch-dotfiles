@@ -1,5 +1,5 @@
 {
-    "layer": "top",
+   "layer": "top",
     "position": "top",
     "mod": "dock",
     "exclusive": true,
@@ -81,7 +81,7 @@
         "spacing": 10
     },
     "clock": {
-        "format": "{: %I:%M %p  %a, %b %e}",
+        "format": "{: %H:%M  %a, %b %e}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt>{calendar}</tt>"
     },
     "backlight": {
