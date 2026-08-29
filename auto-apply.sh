@@ -12,10 +12,6 @@ echo "│        FELLA DOTFILES       │"
 echo "╰─────────────────────────────╯"
 echo
 
-# ─────────────────────────────────────
-# Clone or update repository
-# ─────────────────────────────────────
-
 if [ -d "$DOTFILES/.git" ]; then
     echo "  [GIT ] Updating dotfiles..."
     git -C "$DOTFILES" pull --ff-only
@@ -32,40 +28,74 @@ fi
 echo
 
 # ─────────────────────────────────────
-# Apply configs
+# Helper
 # ─────────────────────────────────────
 
-mkdir -p "$CONFIG"
+link_file() {
+    local source="$1"
+    local target="$2"
 
-for source in "$DOTFILES"/*; do
-
-    # Only process directories
-    [ -d "$source" ] || continue
-
-    name="$(basename "$source")"
-    target="$CONFIG/$name"
-
-    # Ignore Git/internal directories
-    [ "$name" = ".git" ] && continue
-
-    # Already correctly linked
-    if [ -L "$target" ] && [ "$(readlink -f "$target")" = "$(readlink -f "$source")" ]; then
-        echo "  [ OK  ] $name"
-        continue
+    # Already the correct symlink
+    if [ -L "$target" ] && \
+       [ "$(readlink -f "$target")" = "$(readlink -f "$source")" ]; then
+        echo "  [ OK  ] $target"
+        return
     fi
 
-    # Existing config
+    # Existing file/directory/symlink
     if [ -e "$target" ] || [ -L "$target" ]; then
-        backup="$target.backup-$(date +%Y%m%d-%H%M%S)"
+        local backup="${target}.backup-$(date +%Y%m%d-%H%M%S)"
 
-        echo "  [BACK ] $name"
+        echo "  [BACK ] $target"
         mv "$target" "$backup"
     fi
 
+    mkdir -p "$(dirname "$target")"
+
     ln -s "$source" "$target"
 
-    echo "  [LINK ] $name"
-done
+    echo "  [LINK ] $target"
+}
+
+# ─────────────────────────────────────
+# ~/.config
+# ─────────────────────────────────────
+
+if [ -d "$DOTFILES/config" ]; then
+
+    for source in "$DOTFILES/config"/*/; do
+        [ -d "$source" ] || continue
+
+        name="$(basename "$source")"
+
+        link_file \
+            "$source" \
+            "$HOME/.config/$name"
+    done
+
+fi
+
+# ─────────────────────────────────────
+# Home files
+# ─────────────────────────────────────
+
+if [ -d "$DOTFILES/home" ]; then
+
+    for source in "$DOTFILES/home"/.*; do
+        [ -e "$source" ] || continue
+
+        name="$(basename "$source")"
+
+        # Ignore . and ..
+        [ "$name" = "." ] && continue
+        [ "$name" = ".." ] && continue
+
+        link_file \
+            "$source" \
+            "$HOME/$name"
+    done
+
+fi
 
 echo
 echo "  ──────────────────────────────────"
