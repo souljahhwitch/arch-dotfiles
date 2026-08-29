@@ -2,9 +2,7 @@
 
 set -e
 
-REPO="https://github.com/souljahhwitch/arch-dotfiles.git"
 DOTFILES="$HOME/arch-dotfiles"
-CONFIG="$HOME/.config"
 
 echo
 echo "╭─────────────────────────────╮"
@@ -12,19 +10,17 @@ echo "│        FELLA DOTFILES       │"
 echo "╰─────────────────────────────╯"
 echo
 
-if [ -d "$DOTFILES/.git" ]; then
-    echo "  [GIT ] Updating dotfiles..."
-    git -C "$DOTFILES" pull --ff-only
-else
-    if [ -e "$DOTFILES" ]; then
-        echo "  [ERR ] $DOTFILES exists but is not a git repository."
-        exit 1
-    fi
+# ─────────────────────────────────────
+# Check repository
+# ─────────────────────────────────────
 
-    echo "  [GIT ] Downloading dotfiles..."
-    git clone "$REPO" "$DOTFILES"
+if [ ! -d "$DOTFILES" ]; then
+    echo "  [ERR ] Dotfiles directory not found:"
+    echo "        $DOTFILES"
+    exit 1
 fi
 
+echo "  [INFO] Using $DOTFILES"
 echo
 
 # ─────────────────────────────────────
@@ -35,7 +31,7 @@ link_file() {
     local source="$1"
     local target="$2"
 
-    # Already the correct symlink
+    # Already linked correctly
     if [ -L "$target" ] && \
        [ "$(readlink -f "$target")" = "$(readlink -f "$source")" ]; then
         echo "  [ OK  ] $target"
@@ -86,7 +82,6 @@ if [ -d "$DOTFILES/home" ]; then
 
         name="$(basename "$source")"
 
-        # Ignore . and ..
         [ "$name" = "." ] && continue
         [ "$name" = ".." ] && continue
 
@@ -95,6 +90,22 @@ if [ -d "$DOTFILES/home" ]; then
             "$HOME/$name"
     done
 
+fi
+
+# ─────────────────────────────────────
+# Dark mode
+# ─────────────────────────────────────
+
+echo
+
+if command -v gsettings >/dev/null 2>&1; then
+    echo "  [GTK  ] Setting dark mode..."
+
+    gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+
+    echo "  [ OK  ] GTK dark mode"
+else
+    echo "  [SKIP ] gsettings not found"
 fi
 
 echo
