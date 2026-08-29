@@ -66,21 +66,21 @@
     foreground = "#d399a1"
     highlight = "#d399a1"
     frame_color = "#d399a1"
-    timeout = 1
+    timeout = 3
 
 [urgency_normal]
     background = "#222222"
     foreground = "#d399a1"
     highlight = "#d399a1"
     frame_color = "#d399a1"
-    timeout = 1
+    timeout = 3
 
 [urgency_critical]
     background = "#222222"
     foreground = "#f38ba8"
     highlight = "#f38ba8"
     frame_color = "#f38ba8"
-    timeout = 2
+    timeout = 5
     [volume]
     stack_tag = volume
     format = "<span font='JetBrainsMono Nerd Font 11' foreground='#d399a1'>󰕾</span>  <span foreground='#d399a1'><b>%s</b></span>\n<span foreground='#eeeeee'>%b</span>"

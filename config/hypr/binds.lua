@@ -8,6 +8,7 @@ hl.bind("CTRL + SHIFT + M", hl.dsp.pass({window = "class:^vesktop"}))
 -- Core Applications
 hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd("alacritty"))
 hl.bind("CTRL + ALT + T", hl.dsp.exec_cmd("kitty"))
+hl.bind(mainMod .. " + TAB", hl.dsp.window.swap({ next = true }))
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 hl.bind(mainMod .. " + D", hl.dsp.window.fullscreen())
 hl.bind("ALT + F4", hl.dsp.window.close())

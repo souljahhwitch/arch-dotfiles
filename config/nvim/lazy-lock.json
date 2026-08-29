@@ -7,5 +7,5 @@
   "plenary.nvim": { "branch": "master", "commit": "74b06c6c75e4eeb3108ec01852001636d85a932b" },
   "presence.nvim": { "branch": "main", "commit": "87c857a56b7703f976d3a5ef15967d80508df6e6" },
   "telescope.nvim": { "branch": "master", "commit": "a0bbec21143c7bc5f8bb02e0005fa0b982edc026" },
-  "yazi.nvim": { "branch": "main", "commit": "530fb1092af77ae54b6ec58ee367ad554e78f576" }
+  "yazi.nvim": { "branch": "main", "commit": "d5f970a6c6b49cfbd7060b9dec100a094f0172dd" }
 }
