@@ -1,3 +1,4 @@
+```bash
 #!/bin/bash
 
 set -e
@@ -22,6 +23,48 @@ fi
 
 echo "  [INFO] Using $DOTFILES"
 echo
+
+# ─────────────────────────────────────
+# Dependencies
+# ─────────────────────────────────────
+
+read -rp "  Do you need to install dependencies? [y/N] " INSTALL_DEPS
+
+if [[ "$INSTALL_DEPS" =~ ^[Yy]$ ]]; then
+
+    echo
+    echo "  [INFO] Installing dependencies..."
+    echo
+
+    PACKAGES=(
+        hyprland
+        waybar
+        dunst
+        hyprpaper
+        hypridle
+        hyprlock
+        hyprpolkitagent
+        xdg-desktop-portal-hyprland
+        kitty
+        rofi
+        fastfetch
+        yazi
+        wl-clipboard
+        cliphist
+        pipewire
+        wireplumber
+        ttf-cascadia-mono-nerd
+        ttf-jetbrains-mono-nerd
+    )
+
+    sudo pacman -S --needed "${PACKAGES[@]}"
+
+    echo
+    echo "  [ OK  ] Dependencies installed"
+else
+    echo
+    echo "  [SKIP ] Dependency installation"
+fi
 
 # ─────────────────────────────────────
 # Helper
@@ -113,3 +156,5 @@ echo "  ────────────────────────
 echo "  Dotfiles applied successfully."
 echo "  ──────────────────────────────────"
 echo
+```
+

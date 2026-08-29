@@ -4,6 +4,11 @@
 local mainMod = "SUPER"
 
 hl.bind("CTRL + SHIFT + M", hl.dsp.pass({window = "class:^vesktop"}))
+hl.bind("PAGE_DOWN", hl.dsp.send_shortcut({
+    mods = "CTRL SHIFT",
+    key = "M",
+    window = "class:^vesktop",
+}))
 
 -- Core Applications
 hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd("alacritty"))
@@ -17,7 +22,29 @@ hl.bind(mainMod .. " + F", hl.dsp.exec_cmd("firefox"))
 hl.bind(mainMod .. "+ C", hl.dsp.exec_cmd("vesktop"))
 hl.bind(mainMod .. "+ L", hl.dsp.exec_cmd("hyprlock"))
 
+--  Toggle the TV =D
+local tv = "desc:Samsung Electric Company SAMSUNG 0x01000E00"
+local tv_enabled = true
 
+hl.bind(mainMod .. " + 0", function()
+    if tv_enabled then
+        hl.monitor({
+            output = tv,
+            disabled = true,
+        })
+
+        tv_enabled = false
+    else
+        hl.monitor({
+            output = tv,
+            mode = "3840x2160@30",
+            position = "0x0",
+            scale = 1,
+        })
+
+        tv_enabled = true
+    end
+end)
 
 -- Rofi Launchers
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(os.getenv("HOME") .. "/.config/rofi/launchers/launcher.sh"))
@@ -35,12 +62,6 @@ hl.bind(mainMod .. " + SHIFT + ALT + R", hl.dsp.exec_cmd("reboot"))
 hl.bind(mainMod .. " + SHIFT + ALT + L", function()
   hl.dispatch(hl.dsp.exit())
 end)
-
--- Turn off screen
-hl.bind(mainMod .. " + SHIFT + ALT + S", hl.dsp.exec_cmd("sleep 1 && hyprctl dispatch dpms off"))
-
--- Turn on screen
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("sleep 1 && hyprctl dispatch dpms on"))
 
 
 -- Window settings

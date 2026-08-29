@@ -1,0 +1,24 @@
+#!/bin/bash
+
+TV="desc:Samsung Electric Company SAMSUNG 0x01000E00"
+
+# Check whether the TV is currently enabled
+if hyprctl monitors -j | jq -e --arg desc "Samsung Electric Company SAMSUNG 0x01000E00" \
+    '.[] | select(.description == $desc)' >/dev/null; then
+
+    # Move workspace 3 away from the TV
+    hyprctl dispatch moveworkspacetomonitor 3 DP-4
+
+    # Disable TV
+    hyprctl dispatch eval "monitor = $TV,disable"
+
+else
+
+    # Enable TV
+    hyprctl dispatch eval "monitor = $TV,3840x2160@30,0x0,1"
+
+    sleep 0.3
+
+    # Return workspace 3 to TV
+    hyprctl dispatch moveworkspacetomonitor 3 "$TV"
+fi
