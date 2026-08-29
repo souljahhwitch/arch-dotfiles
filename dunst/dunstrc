@@ -1,0 +1,86 @@
+[global]
+    ### Display ###
+    monitor = 0
+    follow = none
+    width = 260
+    height = 80
+    origin = top-right
+    offset = 20x20
+    scale = 0
+    notification_limit = 0
+
+    ### Progress Bar ###
+    progress_bar = true
+    progress_bar_height = 6
+    progress_bar_frame_width = 0
+    progress_bar_min_width = 220
+    progress_bar_max_width = 260
+
+    ### Layout ###
+    transparency = 3
+    separator_height = 0
+    padding = 10
+    horizontal_padding = 14
+    text_icon_padding = 8
+    frame_width = 2
+    frame_color = "#d399a1"
+    gap_size = 4
+    separator_color = frame
+    sort = yes
+
+    ### Text ###
+    font = Sans 10
+    line_height = 0
+    markup = full
+    format = "<span foreground='#d399a1'><b>%s</b></span>\n<span foreground='#eeeeee'>%b</span>"
+    alignment = left
+    vertical_alignment = center
+    show_age_threshold = -1
+    ellipsize = middle
+    ignore_newline = no
+    stack_duplicates = false
+    hide_duplicate_count = true
+    show_indicators = no
+
+    ### Icons ###
+    icon_position = none
+    min_icon_size = 0
+    max_icon_size = 0
+
+    ### History ###
+    sticky_history = no
+    history_length = 5
+
+    ### Misc ###
+    dmenu = /usr/bin/dmenu -p dunst:
+    browser = /usr/bin/xdg-open
+    always_run_script = true
+    corner_radius = 12
+    ignore_dbusclose = false
+
+[experimental]
+    per_monitor_dpi = false
+
+[urgency_low]
+    background = "#222222"
+    foreground = "#d399a1"
+    highlight = "#d399a1"
+    frame_color = "#d399a1"
+    timeout = 1
+
+[urgency_normal]
+    background = "#222222"
+    foreground = "#d399a1"
+    highlight = "#d399a1"
+    frame_color = "#d399a1"
+    timeout = 1
+
+[urgency_critical]
+    background = "#222222"
+    foreground = "#f38ba8"
+    highlight = "#f38ba8"
+    frame_color = "#f38ba8"
+    timeout = 2
+    [volume]
+    stack_tag = volume
+    format = "<span font='JetBrainsMono Nerd Font 11' foreground='#d399a1'>󰕾</span>  <span foreground='#d399a1'><b>%s</b></span>\n<span foreground='#eeeeee'>%b</span>"
