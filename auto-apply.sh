@@ -1,3 +1,12 @@
+
+# bash profile VVVV
+# 
+# if [[ "$(tty)" == "/dev/tty1" ]]; then
+#    exec start-hyprland
+# fi
+ 
+
+
 #!/bin/bash
 
 set -euo pipefail
@@ -10,7 +19,11 @@ echo "╭───────────────────────�
 echo "│        FELLA DOTFILES       │"
 echo "╰─────────────────────────────╯"
 echo
-so
+
+# ─────────────────────────────────────
+# Check repository
+# ─────────────────────────────────────
+
 if [[ ! -d "$DOTFILES" ]]; then
     echo "  [ERR ] Dotfiles directory not found:"
     echo "        $DOTFILES"
@@ -58,10 +71,39 @@ PACKAGES=(
 echo "  [INFO] Installing packages..."
 echo
 
-sudo pacman -Syu --needed "${PACKAGES[@]}"
+sudo pacman -S --needed "${PACKAGES[@]}"
 
 echo
-echo "  [ OK  ] Packages installed"
+echo "  [ OK  ] Package installation complete"
+echo
+
+# ─────────────────────────────────────
+# Verify packages
+# ─────────────────────────────────────
+
+echo "  [INFO] Verifying packages..."
+echo
+
+FAILED=0
+
+for package in "${PACKAGES[@]}"; do
+    if pacman -Q "$package" >/dev/null 2>&1; then
+        echo "  [ OK  ] $package"
+    else
+        echo "  [ERR ] $package is not installed"
+        FAILED=1
+    fi
+done
+
+if [[ "$FAILED" -ne 0 ]]; then
+    echo
+    echo "  [ERR ] Package verification failed."
+    echo "  [ERR ] Configs will NOT be modified."
+    exit 1
+fi
+
+echo
+echo "  [ OK  ] All packages verified"
 echo
 
 # ─────────────────────────────────────
@@ -85,10 +127,34 @@ backup() {
 }
 
 # ─────────────────────────────────────
-# Apply config directories
+# Symlink helper
 # ─────────────────────────────────────
 
-echo "  [INFO] Applying ~/.config..."
+link_config() {
+    local source="$1"
+    local target="$2"
+
+    # Already points to the correct source
+    if [[ -L "$target" ]] &&
+       [[ "$(readlink -f "$target")" == "$(readlink -f "$source")" ]]; then
+        echo "  [ OK  ] $target"
+        return
+    fi
+
+    backup "$target"
+
+    mkdir -p "$(dirname "$target")"
+
+    ln -s "$source" "$target"
+
+    echo "  [LINK ] $target"
+}
+
+# ─────────────────────────────────────
+# Apply ~/.config
+# ─────────────────────────────────────
+
+echo "  [INFO] Applying ~/.config symlinks..."
 echo
 
 mkdir -p "$HOME/.config"
@@ -99,22 +165,18 @@ for source in "$DOTFILES/config"/*; do
     name="$(basename "$source")"
     target="$HOME/.config/$name"
 
-    backup "$target"
-
-    echo "  [COPY ] $name"
-
-    cp -a "$source" "$target"
+    link_config "$source" "$target"
 done
 
 echo
-echo "  [ OK  ] ~/.config applied"
+echo "  [ OK  ] ~/.config symlinks applied"
 
 # ─────────────────────────────────────
 # Apply home files
 # ─────────────────────────────────────
 
 echo
-echo "  [INFO] Applying home files..."
+echo "  [INFO] Applying home file symlinks..."
 echo
 
 if [[ -d "$DOTFILES/home" ]]; then
@@ -124,16 +186,12 @@ if [[ -d "$DOTFILES/home" ]]; then
         name="$(basename "$source")"
         target="$HOME/$name"
 
-        backup "$target"
-
-        echo "  [COPY ] $name"
-
-        cp -a "$source" "$target"
+        link_config "$source" "$target"
     done
 fi
 
 echo
-echo "  [ OK  ] Home files applied"
+echo "  [ OK  ] Home file symlinks applied"
 
 # ─────────────────────────────────────
 # GTK dark mode
@@ -163,6 +221,7 @@ echo
 echo "  Backups:"
 echo "  $BACKUP_DIR"
 echo
-echo "  Configs were COPIED, not symlinked."
+echo "  All configs are now symlinked"
+echo "  directly to the Git repository."
 echo "  ──────────────────────────────────"
 echo
