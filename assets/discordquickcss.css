@@ -1,0 +1,61 @@
+@import url('https://raw.githubusercontent.com/imbypass/base16-discord/refs/heads/main/base16.css');
+
+/* Hide New Visual Refresh Top Bar */
+div[class^="base_"],
+div[class*=" base_"] {
+    div[class^="bar_"],
+    div[class*=" bar_"] {
+        display: none !important;
+    }
+
+    grid-template-rows: [top] min-content [titleBarEnd] min-content [noticeEnd] 1fr [end] !important;
+}
+div[class^="tutorialContainer_"],
+div[class*=" tutorialContainer_"] {
+    padding-top: 12px;
+}
+
+:root {
+  --font-code: "Cascadia Code", monospace;
+  --font: "Cascadia Code", monospace;
+
+  --base00: #2b2121;
+  --base01: #443134;
+  --base02: #443134;
+  --base03: #d399a1;
+  --base04: #d399a1;
+  --base05: #DCC9BC;
+  --base06: #fad3d9;
+  --base07: #db445d;
+  --base08: #fc5d5d;
+  --base09: #aa6f26;
+  --base0A: #886EAE;
+  --base0B: #768F80;
+  --base0C: #756D94;
+    --base0D: #614F76;
+    --base0E: #7B3D79;
+    --base0F: #AE3F82;
+}
+
+body {
+  font-family: var(--font);
+  font-weight: 600; /* semibold */
+}
+
+/* Target the top-left Home/DM button SVG directly */
+/* Hide the default Home/DM SVG icon */
+div[class^="childWrapper__"] svg {
+    display: none !important;
+}
+
+/* Add a custom image on top */
+/*div[class^="childWrapper__"] {
+    background-image: url("https://i.imgur.com/jsx6CgA.png") !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    border-radius: 50%;  
+    width: 48px;
+    height: 48px;
+} */
+

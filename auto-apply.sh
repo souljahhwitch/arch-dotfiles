@@ -54,6 +54,7 @@ PACKAGES=(
 
     kitty
     rofi
+    neovim
     fastfetch
     yazi
 

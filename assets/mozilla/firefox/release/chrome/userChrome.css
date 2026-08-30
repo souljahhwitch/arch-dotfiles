@@ -1,0 +1,85 @@
+:root {
+    --base00: #2b2121;
+    --base01: #443134;
+    --base02: #443134;
+    --base03: #d399a1;
+    --base04: #d399a1;
+    --base05: #dcc9bc;
+    --base06: #fad3d9;
+    --base07: #db445d;
+    --base08: #fc5d5d;
+    --base09: #aa6f26;
+    --base0A: #886eae;
+    --base0B: #768f80;
+    --base0C: #756d94;
+    --base0D: #614f76;
+    --base0E: #7b3d79;
+    --base0F: #ae3f82;
+}
+
+#navigator-toolbox {
+    background: var(--base00) !important;
+}
+
+#TabsToolbar,
+#nav-bar,
+#PersonalToolbar {
+    background: var(--base00) !important;
+    color: var(--base05) !important;
+}
+
+.tab-background {
+    background: var(--base01) !important;
+}
+
+.tabbrowser-tab[selected="true"] .tab-background {
+    background: var(--base02) !important;
+}
+
+.tabbrowser-tab[selected="true"] .tab-label {
+    color: var(--base05) !important;
+}
+
+.tabbrowser-tab:not([selected="true"]) .tab-label {
+    color: var(--base04) !important;
+}
+/* Style the background layer instead of the outer urlbar container */
+#urlbar-background {
+    background: var(--base01) !important;
+}
+
+/* Base border color for unfocused state */
+#urlbar:not([focused]) > #urlbar-background {
+    border: 1px solid var(--base03) !important;
+}
+
+/* Border color for focused state */
+#urlbar[focused] > #urlbar-background {
+    border: 1px solid var(--base0C) !important;
+}
+
+/* Clear outer wrapper background to prevent leakage */
+#urlbar {
+    background: transparent !important;
+}
+
+#urlbar-input {
+    color: var(--base05) !important;
+}
+
+menupopup,
+panel {
+    --panel-background: var(--base00) !important;
+    --panel-color: var(--base05) !important;
+}
+
+menu,
+menuitem {
+    color: var(--base05) !important;
+}
+
+menu:hover,
+menuitem:hover {
+    background: var(--base02) !important;
+    color: var(--base06) !important;
+}
