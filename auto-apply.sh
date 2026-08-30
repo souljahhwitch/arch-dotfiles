@@ -1,4 +1,3 @@
-```bash
 #!/bin/bash
 
 set -euo pipefail
@@ -11,11 +10,7 @@ echo "╭───────────────────────�
 echo "│        FELLA DOTFILES       │"
 echo "╰─────────────────────────────╯"
 echo
-
-# ─────────────────────────────────────
-# Check repository
-# ─────────────────────────────────────
-
+so
 if [[ ! -d "$DOTFILES" ]]; then
     echo "  [ERR ] Dotfiles directory not found:"
     echo "        $DOTFILES"
@@ -90,35 +85,13 @@ backup() {
 }
 
 # ─────────────────────────────────────
-# Link helper
-# ─────────────────────────────────────
-
-link_config() {
-    local source="$1"
-    local target="$2"
-
-    # Already correct
-    if [[ -L "$target" ]] &&
-       [[ "$(readlink -f "$target")" == "$(readlink -f "$source")" ]]; then
-        echo "  [ OK  ] $target"
-        return
-    fi
-
-    backup "$target"
-
-    mkdir -p "$(dirname "$target")"
-
-    ln -s "$source" "$target"
-
-    echo "  [LINK ] $target"
-}
-
-# ─────────────────────────────────────
-# Apply ~/.config
+# Apply config directories
 # ─────────────────────────────────────
 
 echo "  [INFO] Applying ~/.config..."
 echo
+
+mkdir -p "$HOME/.config"
 
 for source in "$DOTFILES/config"/*; do
     [[ -d "$source" ]] || continue
@@ -126,7 +99,11 @@ for source in "$DOTFILES/config"/*; do
     name="$(basename "$source")"
     target="$HOME/.config/$name"
 
-    link_config "$source" "$target"
+    backup "$target"
+
+    echo "  [COPY ] $name"
+
+    cp -a "$source" "$target"
 done
 
 echo
@@ -147,7 +124,11 @@ if [[ -d "$DOTFILES/home" ]]; then
         name="$(basename "$source")"
         target="$HOME/$name"
 
-        link_config "$source" "$target"
+        backup "$target"
+
+        echo "  [COPY ] $name"
+
+        cp -a "$source" "$target"
     done
 fi
 
@@ -167,7 +148,7 @@ if command -v gsettings >/dev/null 2>&1; then
 
     echo "  [ OK  ] GTK dark mode"
 else
-    echo "  [SKIP ] gsettings not installed"
+    echo "  [SKIP ] gsettings not found"
 fi
 
 # ─────────────────────────────────────
@@ -182,8 +163,6 @@ echo
 echo "  Backups:"
 echo "  $BACKUP_DIR"
 echo
-echo "  Restart your session for all"
-echo "  applications to pick up changes."
+echo "  Configs were COPIED, not symlinked."
+echo "  ──────────────────────────────────"
 echo
-```
-
