@@ -29,7 +29,7 @@
     sort = yes
 
     ### Text ###
-    font = Sans 10
+    font = "Segoe UI Variable Static Text 11"
     line_height = 0
     markup = full
     format = "<span foreground='#d399a1'><b>%s</b></span>\n<span foreground='#eeeeee'>%b</span>"
