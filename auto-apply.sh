@@ -66,6 +66,7 @@ PACKAGES=(
     pipewire
     pipewire-pulse
     wireplumber
+    nwg-displays
 
     ttf-cascadia-mono-nerd
     ttf-jetbrains-mono-nerd

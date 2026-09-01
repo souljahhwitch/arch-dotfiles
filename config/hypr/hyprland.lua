@@ -2,6 +2,85 @@
 --
 require("binds")
 
+
+local function is_laptop()
+    local f = io.open("/sys/class/dmi/id/chassis_type", "r")
+    if not f then
+        return false
+    end
+
+    local chassis = tonumber(f:read("*l"))
+    f:close()
+
+    return chassis == 9
+        or chassis == 10
+        or chassis == 14
+        or chassis == 31
+        or chassis == 32
+end
+
+if is_laptop() then
+
+  hl.workspace_rule({
+    workspace = "1",
+    monitor = "eDP-1",
+    default = true,
+  })
+
+
+hl.monitor({
+    output = "desc:Samsung Electric Company SAMSUNG 0x01000E00",
+    mode = "1920x1080@60",
+    position = "0x0",
+    scale = 1,
+})
+
+else
+
+  hl.workspace_rule({
+    workspace = "1",
+    monitor = "desc:Shenzhen KTC Technology Group H27E22P",
+    default = true,
+})
+
+hl.workspace_rule({
+    workspace = "2",
+    monitor = "desc:Acer Technologies KG241Q P 0x0261C41A",
+    default = true,
+})
+
+hl.workspace_rule({
+    workspace = "3",
+    monitor = "desc:Samsung Electric Company SAMSUNG 0x01000E00",
+    default = true,
+})
+hl.monitor({
+    output = "desc:Samsung Electric Company SAMSUNG 0x01000E00",
+    mode = "3840x2160@30",
+    position = "0x0",
+    scale = 1,
+})
+
+hl.monitor({
+    output = "desc:Shenzhen KTC Technology Group H27E22P",
+    mode = "1920x1080@280",
+    position = "0x2160",
+    scale = 1,
+})
+
+hl.monitor({
+    output = "desc:Acer Technologies KG241Q P 0x0261C41A",
+    mode = "1920x1080@143.85",
+    position = "1920x2160",
+    scale = 1,
+})
+
+end
+
+
+
+
+
 hl.workspace_rule({
     workspace = "1",
     monitor = "desc:Shenzhen KTC Technology Group H27E22P",
