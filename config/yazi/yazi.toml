@@ -3,7 +3,16 @@ edit = [
     { run = 'nvim %s', block = true, for = "unix" },
 ]
 
+extract = [
+    { run = '7z x %s', desc = "Extract", block = true, for = "unix" },
+]
+
 [open]
 rules = [
     { mime = "text/*", use = [ "edit" ] },
+    { mime = "application/zip", use = [ "extract" ] },
+    { mime = "application/x-7z-compressed", use = [ "extract" ] },
+    { mime = "application/vnd.rar", use = [ "extract" ] },
 ]
+
+

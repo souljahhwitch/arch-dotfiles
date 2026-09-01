@@ -54,7 +54,7 @@ hl.bind(mainMod .. " + PERIOD", hl.dsp.exec_cmd("$HOME/.config/rofi/emoji/emoji.
 hl.bind(mainMod .. " + X", hl.dsp.exec_cmd("$HOME/.config/rofi/powermenu/type-2/powermenu.sh"))
 
 
-hl.bind("SUPER + SHIFT + S", hl.dsp.exec_cmd("hyprshot -m region --clipboard-only"))
+hl.bind("SUPER + SHIFT + S", hl.dsp.exec_cmd("hyprshot -m region -z --clipboard-only"))
 
 -- Poweroff, Logout, Reboot
 hl.bind(mainMod .. " + SHIFT + ALT + P", hl.dsp.exec_cmd("shutdown -h now"))

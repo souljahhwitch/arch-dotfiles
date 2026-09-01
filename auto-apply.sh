@@ -49,6 +49,8 @@ PACKAGES=(
     hyprpaper
     hypridle
     hyprlock
+    hyprpicker
+    hyprshot
     hyprpolkitagent
     xdg-desktop-portal-hyprland
 
