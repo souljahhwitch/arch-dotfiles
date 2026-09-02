@@ -4,15 +4,14 @@ edit = [
 ]
 
 extract = [
-    { run = '7z x %s', desc = "Extract", block = true, for = "unix" },
+	{ run = '7z x %s', desc = "Extract", block = true, for = "unix" },
 ]
 
 [open]
 rules = [
-    { mime = "text/*", use = [ "edit" ] },
-    { mime = "application/zip", use = [ "extract" ] },
-    { mime = "application/x-7z-compressed", use = [ "extract" ] },
-    { mime = "application/vnd.rar", use = [ "extract" ] },
+	{ mime = "text/*", use = "edit" },
+	{ url = "*.{lua,py,js,ts,jsx,tsx,rs,c,cpp,h,hpp,sh,bash,zsh,fish,toml,yaml,yml,json,md,txt}", use = "edit" },
+	{ mime = "application/zip", use = [ "extract" ] },
+	{ mime = "application/x-7z-compressed", use = [ "extract" ] },
+	{ mime = "application/vnd.rar", use = [ "extract" ] },
 ]
-
-

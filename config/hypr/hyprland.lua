@@ -20,62 +20,13 @@ local function is_laptop()
 end
 
 if is_laptop() then
-
-    hl.workspace_rule({
-        workspace = "1",
-        monitor = "eDP-1",
-        default = true,
-    })
-
-    hl.monitor({
-        output = "desc:Samsung Electric Company SAMSUNG 0x01000E00",
-        mode = "1920x1080@60",
-        position = "0x0",
-        scale = 1,
-    })
-
+    dofile(os.getenv("HOME") .. "/.config/hypr/monitors/laptop.lua")
 else
+    dofile(os.getenv("HOME") .. "/.config/hypr/monitors/desktop.lua")
+end
 
-    hl.workspace_rule({
-        workspace = "1",
-        monitor = "desc:Shenzhen KTC Technology Group H27E22P",
-        default = true,
-    })
 
-    hl.workspace_rule({
-        workspace = "2",
-        monitor = "desc:Acer Technologies KG241Q P 0x0261C41A",
-        default = true,
-    })
 
-    hl.workspace_rule({
-        workspace = "3",
-        monitor = "desc:Samsung Electric Company SAMSUNG 0x01000E00",
-        default = true,
-    })
-
-    hl.monitor({
-        output = "desc:Samsung Electric Company SAMSUNG 0x01000E00",
-        mode = "3840x2160@30",
-        position = "0x0",
-        scale = 1,
-    })
-
-    hl.monitor({
-        output = "desc:Shenzhen KTC Technology Group H27E22P",
-        mode = "1920x1080@280",
-        position = "0x2160",
-        scale = 1,
-    })
-
-    hl.monitor({
-        output = "desc:Acer Technologies KG241Q P 0x0261C41A",
-        mode = "1920x1080@143.85",
-        position = "1920x2160",
-        scale = 1,
-    })
-
-    end
 
 hl.on("hyprland.start", function()
     hl.exec_cmd("hyprlock")
