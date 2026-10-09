@@ -26,21 +26,25 @@
         "pulseaudio",
         "pulseaudio#microphone"
     ],
-    "hyprland/workspaces": {
+"hyprland/workspaces": {
         "format": "{icon}",
+        "on-click": "activate",
         "on-scroll-up": "hyprctl dispatch workspace e+1",
         "on-scroll-down": "hyprctl dispatch workspace e-1",
+        "all-outputs": true,
+        "active-only": false,
         "format-icons": {
             "1": "😎",
             "2": "🌐",
             "3": "👩🏽‍💻",
             "4": "📒",
-            "5": "🎵"
+            "5": "🎵",
+            "default": ""
         },
-        "persistent_workspaces": {
-            "*": 1
+        "persistent-workspaces": {
+            "*": [1, 2, 3, 4, 5]
         }
-    },
+    }, 
     "hyprland/window": {
         "format": "{}"
     },

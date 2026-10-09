@@ -10,9 +10,10 @@ extract = [
 [open]
 rules = [
     { mime = "text/*", use = [ "edit" ] },
-    { mime = "application/zip", use = [ "extract" ] },
-    { mime = "application/x-7z-compressed", use = [ "extract" ] },
-    { mime = "application/vnd.rar", use = [ "extract" ] },
+    
+    # "url" is the correct Yazi key for extension matching
+    { url = "*.zip", use = [ "extract" ] },
+    { url = "*.7z", use = [ "extract" ] },
+    { url = "*.rar", use = [ "extract" ] },
 ]
-
 
