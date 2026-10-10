@@ -1,6 +1,6 @@
 [global]
     ### Display ###
-    monitor = 0
+    monitor = 1
     follow = none
     width = 260
     height = 80
@@ -8,6 +8,9 @@
     offset = 20x20
     scale = 0
     notification_limit = 0
+
+    browser = /usr/bin/xdg-open
+    mouse_left_click = do_action
 
     ### Progress Bar ###
     progress_bar = true
@@ -84,3 +87,5 @@
     [volume]
     stack_tag = volume
     format = "<span font='JetBrainsMono Nerd Font 11' foreground='#d399a1'>󰕾</span>  <span foreground='#d399a1'><b>%s</b></span>\n<span foreground='#eeeeee'>%b</span>"
+
+
