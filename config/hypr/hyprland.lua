@@ -25,7 +25,15 @@ else
     dofile(os.getenv("HOME") .. "/.config/hypr/monitors/desktop.lua")
 end
 
-
+hl.window_rule({
+    name = "kitty-floating",
+    match = {
+        class = "^kitty$",
+    },
+    float = true,
+    size = "900 600",
+    center = true,
+})
 
 
 hl.on("hyprland.start", function()
